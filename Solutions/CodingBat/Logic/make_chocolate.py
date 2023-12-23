@@ -8,15 +8,18 @@ make_chocolate(4, 1, 9) → 4
 make_chocolate(4, 1, 10) → -1
 make_chocolate(4, 1, 7) → 2
 """
-x,y,z = (6, 2, 7)
+x, y, z = (5, 4, 9)
+
 
 def make_chocolate(small, big, goal):
-    if goal % 5 <= small and goal - big * 5 <= small and goal >= big * 5:
-        return goal - big * 5
-    elif goal % 5 <= small and goal - big * 5 <= small and goal <= big * 5:
-        return goal - (big-1) * 5 #adjusted the result, but dont think it is correct one.
+    big_needed = min(goal // 5, big)
+    remaining_small = goal - big_needed * 5
+
+    if remaining_small <= small:
+        return remaining_small
     else:
-        return -1
+        return -1 if remaining_small > 0 else 0
+
 
 # Check this task with Vlad, doesn't look correctly., work in progress :)
-print(make_chocolate(x,y,z))
+print(make_chocolate(x, y, z))
